@@ -44,9 +44,9 @@ export default function Navbar() {
           zIndex: 50,
           padding: '0 24px',
           transition: 'all 0.3s ease',
-          background: scrolled ? 'rgba(5, 10, 20, 0.85)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(20px)' : 'none',
-          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
+          background: scrolled ? 'rgba(10,10,10,0.9)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(16px)' : 'none',
+          borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
         }}
       >
         <div style={{
@@ -72,14 +72,15 @@ export default function Navbar() {
               display: 'inline-flex',
               width: 32,
               height: 32,
-              background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple))',
-              borderRadius: 8,
+              background: 'var(--accent)',
+              borderRadius: 6,
               alignItems: 'center',
               justifyContent: 'center',
               fontSize: '0.85rem',
               fontWeight: 900,
+              color: '#0a0a0a',
             }}>H</span>
-            <span className="gradient-text">HamzaFarooqi</span>
+            <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}>Hamza<span style={{ color: 'var(--accent)' }}>.</span></span>
           </a>
 
           {/* Desktop links */}
@@ -98,21 +99,21 @@ export default function Navbar() {
                     borderRadius: 8,
                     fontSize: '0.875rem',
                     fontWeight: 500,
-                    color: active === link.href.replace('#', '') ? 'var(--accent-blue)' : 'var(--text-secondary)',
+                    color: active === link.href.replace('#', '') ? 'var(--accent)' : 'var(--text-secondary)',
                     textDecoration: 'none',
                     transition: 'all 0.2s',
-                    background: active === link.href.replace('#', '') ? 'rgba(59,130,246,0.1)' : 'transparent',
+                    background: active === link.href.replace('#', '') ? 'rgba(212,255,87,0.06)' : 'transparent',
                     display: 'block',
                   }}
                   onMouseEnter={e => {
                     const t = e.target as HTMLElement;
                     t.style.color = 'var(--text-primary)';
-                    t.style.background = 'rgba(255,255,255,0.05)';
+                    t.style.background = 'rgba(255,255,255,0.04)';
                   }}
                   onMouseLeave={e => {
                     const t = e.target as HTMLElement;
-                    t.style.color = active === link.href.replace('#', '') ? 'var(--accent-blue)' : 'var(--text-secondary)';
-                    t.style.background = active === link.href.replace('#', '') ? 'rgba(59,130,246,0.1)' : 'transparent';
+                    t.style.color = active === link.href.replace('#', '') ? 'var(--accent)' : 'var(--text-secondary)';
+                    t.style.background = active === link.href.replace('#', '') ? 'rgba(212,255,87,0.06)' : 'transparent';
                   }}
                 >
                   {link.label}
@@ -125,7 +126,7 @@ export default function Navbar() {
                 className="btn-primary"
                 style={{ padding: '8px 20px', fontSize: '0.85rem' }}
               >
-                Hire Me 🚀
+                Hire me
               </a>
             </li>
           </ul>

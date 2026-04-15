@@ -1,15 +1,15 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const ROLES = [
-  'AI/ML Developer',
-  'CS Student',
-  'Python Enthusiast',
-  'Bug Manufacturer',
-  'Coffee-to-Code Converter',
-  'Debugger of Life',
-  'Open Source Giga-Chad',
+  'Software Engineer',
+  'Code Writer',
+  'Problem Solver',
+  'Bug Creator (unintentionally)',
+  'AI Tools Builder',
+  'Backend Developer',
+  'Occasional Debugger',
 ];
 
 function TypeWriter({ texts }: { texts: string[] }) {
@@ -22,11 +22,11 @@ function TypeWriter({ texts }: { texts: string[] }) {
     let timeout: ReturnType<typeof setTimeout>;
 
     if (!deleting && displayed.length < current.length) {
-      timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 80);
+      timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 75);
     } else if (!deleting && displayed.length === current.length) {
       timeout = setTimeout(() => setDeleting(true), 1800);
     } else if (deleting && displayed.length > 0) {
-      timeout = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 40);
+      timeout = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 35);
     } else if (deleting && displayed.length === 0) {
       setDeleting(false);
       setIdx((idx + 1) % texts.length);
@@ -37,102 +37,13 @@ function TypeWriter({ texts }: { texts: string[] }) {
 
   return (
     <span>
-      <span className="gradient-text">{displayed}</span>
-      <span style={{ animation: 'blink 1s step-end infinite', color: 'var(--accent-blue)' }}>|</span>
+      <span style={{ color: 'var(--accent)' }}>{displayed}</span>
+      <span style={{ animation: 'blink 1s step-end infinite', color: 'var(--accent)', opacity: 0.7 }}>|</span>
     </span>
   );
 }
 
-function ParticleCanvas() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-
-    const particles: { x: number; y: number; vx: number; vy: number; r: number; alpha: number; color: string }[] = [];
-    const colors = ['#3b82f6', '#8b5cf6', '#06b6d4', '#10b981'];
-
-    for (let i = 0; i < 60; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        r: Math.random() * 2 + 0.5,
-        alpha: Math.random() * 0.5 + 0.2,
-        color: colors[Math.floor(Math.random() * colors.length)],
-      });
-    }
-
-    let animId: number;
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Draw connections
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const d = Math.sqrt(dx * dx + dy * dy);
-          if (d < 100) {
-            ctx.save();
-            ctx.globalAlpha = (1 - d / 100) * 0.15;
-            ctx.strokeStyle = '#3b82f6';
-            ctx.lineWidth = 0.5;
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-            ctx.restore();
-          }
-        }
-      }
-
-      for (const p of particles) {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      }
-
-      animId = requestAnimationFrame(animate);
-    };
-
-    animate();
-    return () => cancelAnimationFrame(animId);
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        position: 'absolute',
-        inset: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-      }}
-    />
-  );
-}
-
 export default function HeroSection() {
-  const [clicked, setClicked] = useState(false);
-
   return (
     <section
       id="hero"
@@ -140,75 +51,32 @@ export default function HeroSection() {
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
-        position: 'relative',
-        overflow: 'hidden',
         paddingTop: 64,
+        position: 'relative',
       }}
     >
-      <ParticleCanvas />
+      <div className="container">
+        <div style={{ maxWidth: 680 }}>
 
-      {/* Decorative rings */}
-      <div style={{
-        position: 'absolute',
-        right: '5%',
-        top: '50%',
-        transform: 'translateY(-50%)',
-        width: 500,
-        height: 500,
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-        {[1, 2, 3].map(i => (
-          <div key={i} style={{
-            position: 'absolute',
-            width: i * 160,
-            height: i * 160,
-            borderRadius: '50%',
-            border: `1px solid rgba(59,130,246,${0.1 / i})`,
-            animation: `spin-slow ${20 + i * 10}s linear infinite ${i % 2 === 0 ? 'reverse' : ''}`,
-          }} />
-        ))}
-        {/* Center avatar placeholder */}
-        <div style={{
-          width: 100,
-          height: 100,
-          borderRadius: '50%',
-          background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple))',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '2.5rem',
-          position: 'relative',
-          zIndex: 1,
-          boxShadow: 'var(--glow-blue)',
-        }}>
-          👨‍💻
-        </div>
-      </div>
-
-      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <div style={{ maxWidth: 720 }}>
-          {/* Status indicator */}
+          {/* Availability pill */}
           <div style={{
             display: 'inline-flex',
             alignItems: 'center',
             gap: 8,
-            padding: '6px 16px',
-            background: 'rgba(16, 185, 129, 0.1)',
-            border: '1px solid rgba(16, 185, 129, 0.3)',
+            padding: '6px 14px',
+            background: 'rgba(212,255,87,0.08)',
+            border: '1px solid rgba(212,255,87,0.2)',
             borderRadius: 100,
-            marginBottom: 32,
-            fontSize: '0.8rem',
-            color: '#34d399',
+            marginBottom: 40,
+            fontSize: '0.75rem',
+            color: 'var(--accent)',
             fontFamily: 'var(--font-mono)',
           }}>
             <span style={{
-              width: 8,
-              height: 8,
+              width: 7,
+              height: 7,
               borderRadius: '50%',
-              background: '#10b981',
+              background: 'var(--accent)',
               display: 'inline-block',
               position: 'relative',
             }}>
@@ -216,72 +84,71 @@ export default function HeroSection() {
                 position: 'absolute',
                 inset: -2,
                 borderRadius: '50%',
-                background: '#10b981',
+                background: 'var(--accent)',
                 animation: 'pulse-ring 2s ease-out infinite',
               }} />
             </span>
-            Available for opportunities | Based in Pakistan 🇵🇰
+            Open to work · Pakistan 🇵🇰
           </div>
 
-          {/* Greeting */}
+          {/* Name */}
           <p style={{
             fontFamily: 'var(--font-mono)',
-            color: 'var(--accent-cyan)',
-            fontSize: '1rem',
-            marginBottom: 12,
-            animation: 'fade-up 0.6s ease',
+            color: 'var(--text-muted)',
+            fontSize: '0.9rem',
+            marginBottom: 10,
+            letterSpacing: '0.02em',
           }}>
-            Hey there, I&apos;m —
+            Hi, I&apos;m
           </p>
 
-          {/* Name */}
           <h1 style={{
-            fontSize: 'clamp(3rem, 8vw, 5.5rem)',
+            fontSize: 'clamp(3.5rem, 9vw, 6.5rem)',
             fontWeight: 900,
-            lineHeight: 1,
-            marginBottom: 16,
-            animation: 'fade-up 0.6s ease 0.1s both',
+            lineHeight: 0.95,
+            letterSpacing: '-0.03em',
+            marginBottom: 24,
+            animation: 'fade-up 0.5s ease both',
           }}>
-            Hamza
-            <br />
-            <span className="gradient-text">Farooqi</span>
+            Hamza<br />
+            <span style={{ color: 'var(--accent)' }}>Farooqi.</span>
           </h1>
 
           {/* Dynamic role */}
           <p style={{
-            fontSize: 'clamp(1.2rem, 3vw, 1.6rem)',
+            fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',
             color: 'var(--text-secondary)',
-            fontWeight: 500,
-            marginBottom: 24,
-            minHeight: '2.5rem',
-            animation: 'fade-up 0.6s ease 0.2s both',
+            fontWeight: 400,
+            marginBottom: 28,
+            minHeight: '2rem',
+            animation: 'fade-up 0.5s ease 0.08s both',
           }}>
             <TypeWriter texts={ROLES} />
           </p>
 
-          {/* Description */}
+          {/* One-liner — what I DO not what I've done */}
           <p style={{
-            fontSize: '1.1rem',
+            fontSize: '1.05rem',
             color: 'var(--text-secondary)',
             lineHeight: 1.8,
-            maxWidth: 560,
-            marginBottom: 40,
-            animation: 'fade-up 0.6s ease 0.3s both',
+            maxWidth: 500,
+            marginBottom: 44,
+            animation: 'fade-up 0.5s ease 0.16s both',
           }}>
-            CS student who turns caffeine into code and bugs into &quot;features&quot;. I build AI-powered tools,
-            optimize routes with genetic algorithms, and occasionally wonder why my code works even when I&apos;m not sure it should.
+            I write code for a living (and for fun, which concerns people).
+            Software Engineering student at <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>FAST NUCES</strong>, building things that
+            are actually useful — and occasionally things that just look cool.
           </p>
 
           {/* CTAs */}
           <div style={{
             display: 'flex',
-            gap: 16,
+            gap: 12,
             flexWrap: 'wrap',
-            marginBottom: 60,
-            animation: 'fade-up 0.6s ease 0.4s both',
+            animation: 'fade-up 0.5s ease 0.24s both',
           }}>
             <a href="#projects" className="btn-primary">
-              View My Work 🚀
+              See my work
             </a>
             <a
               href="https://github.com/HamzaFarooqii"
@@ -289,70 +156,34 @@ export default function HeroSection() {
               rel="noopener noreferrer"
               className="btn-ghost"
             >
-              GitHub Profile
+              GitHub
             </a>
-            <button
-              className="btn-ghost"
-              onClick={() => {
-                setClicked(true);
-                setTimeout(() => setClicked(false), 3000);
-              }}
-              style={{ cursor: 'pointer' }}
-            >
-              {clicked ? '✅ Noted!' : '📄 Download CV'}
-            </button>
-          </div>
-
-          {/* Stats */}
-          <div style={{
-            display: 'flex',
-            gap: 40,
-            flexWrap: 'wrap',
-            animation: 'fade-up 0.6s ease 0.5s both',
-          }}>
-            {[
-              { value: '3+', label: 'Projects on GitHub' },
-              { value: '∞', label: 'Bugs Created' },
-              { value: '99%', label: 'Stack Overflow Visits' },
-              { value: '4★', label: 'Coffee Dependency' },
-            ].map(stat => (
-              <div key={stat.label}>
-                <div style={{
-                  fontSize: '1.8rem',
-                  fontWeight: 800,
-                  color: 'var(--accent-blue)',
-                  lineHeight: 1,
-                  fontFamily: 'var(--font-mono)',
-                }}>{stat.value}</div>
-                <div style={{
-                  fontSize: '0.75rem',
-                  color: 'var(--text-muted)',
-                  marginTop: 4,
-                  fontWeight: 500,
-                }}>{stat.label}</div>
-              </div>
-            ))}
+            <a href="#contact" className="btn-ghost">
+              Contact
+            </a>
           </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll hint */}
       <div style={{
         position: 'absolute',
-        bottom: 40,
+        bottom: 36,
         left: '50%',
         transform: 'translateX(-50%)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: 8,
+        gap: 6,
         color: 'var(--text-muted)',
-        fontSize: '0.75rem',
-        animation: 'bounce-soft 2s ease-in-out infinite',
+        fontSize: '0.7rem',
+        fontFamily: 'var(--font-mono)',
+        animation: 'bounce-soft 2.5s ease-in-out infinite',
+        letterSpacing: '0.05em',
       }}>
-        <span>Scroll</span>
-        <svg width="16" height="24" viewBox="0 0 16 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M8 4v16M4 16l4 4 4-4" />
+        scroll
+        <svg width="14" height="20" viewBox="0 0 14 20" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M7 4v12M3 12l4 4 4-4" />
         </svg>
       </div>
     </section>
