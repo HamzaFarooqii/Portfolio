@@ -1,9 +1,6 @@
 'use client';
 
-import { useEffect, useState, Suspense } from 'react';
-import dynamic from 'next/dynamic';
-
-const Scene3D = dynamic(() => import('./Scene3D'), { ssr: false });
+import { useEffect, useState } from 'react';
 
 const ROLES = [
   'Software Engineer',
@@ -59,10 +56,6 @@ export default function HeroSection() {
         overflow: 'hidden',
       }}
     >
-      {/* 3D Background */}
-      <Suspense fallback={null}>
-        <Scene3D />
-      </Suspense>
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 680 }}>

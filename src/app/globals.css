@@ -197,13 +197,17 @@ body {
   transition: var(--transition);
 }
 
-.tag-blue  { color: #60a5fa; border-color: rgba(96, 165, 250, 0.2); background: rgba(96, 165, 250, 0.06); }
-.tag-green { color: #4ade80; border-color: rgba(74, 222, 128, 0.2); background: rgba(74, 222, 128, 0.06); }
-.tag-cyan  { color: #22d3ee; border-color: rgba(34, 211, 238, 0.2); background: rgba(34, 211, 238, 0.06); }
-.tag-orange { color: #fb923c; border-color: rgba(251, 146, 60, 0.2); background: rgba(251, 146, 60, 0.06); }
-.tag-purple { color: #a78bfa; border-color: rgba(167, 139, 250, 0.2); background: rgba(167, 139, 250, 0.06); }
-.tag-yellow { color: #fbbf24; border-color: rgba(251, 191, 36, 0.2); background: rgba(251, 191, 36, 0.06); }
-.tag-pink  { color: #f472b6; border-color: rgba(244, 114, 182, 0.2); background: rgba(244, 114, 182, 0.06); }
+.tag-blue,
+.tag-green,
+.tag-cyan,
+.tag-orange,
+.tag-purple,
+.tag-yellow,
+.tag-pink {
+  color: var(--text-secondary);
+  border-color: var(--border);
+  background: rgba(212, 255, 87, 0.04);
+}
 
 /* ─── Code / mono ────────────────────────────── */
 code, .mono {

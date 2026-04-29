@@ -55,10 +55,25 @@ export default function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate submit
-    await new Promise(r => setTimeout(r, 1500));
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/hamzaa.farooqii@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          message: formState.message,
+          _subject: `Portfolio Contact: ${formState.name}`,
+        }),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      }
+    } catch {
+      // Fallback: open mailto
+      window.location.href = `mailto:hamzaa.farooqii@gmail.com?subject=Portfolio Contact from ${formState.name}&body=${encodeURIComponent(formState.message)}`;
+    }
     setLoading(false);
-    setSubmitted(true);
   };
 
   const copyEmail = () => {
