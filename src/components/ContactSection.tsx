@@ -33,9 +33,9 @@ const SOCIAL_LINKS = [
         <polyline points="22,6 12,13 2,6" />
       </svg>
     ),
-    href: 'mailto:hamzafarooqi918@gmail.com',
+    href: 'mailto:hamzaa.farooqii@gmail.com',
     color: '#8b5cf6',
-    label: 'hamzafarooqi918@gmail.com',
+    label: 'hamzaa.farooqii@gmail.com',
   },
 ];
 
@@ -62,7 +62,7 @@ export default function ContactSection() {
   };
 
   const copyEmail = () => {
-    navigator.clipboard.writeText('hamzafarooqi918@gmail.com');
+    navigator.clipboard.writeText('hamzaa.farooqii@gmail.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
