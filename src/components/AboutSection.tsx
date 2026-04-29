@@ -5,13 +5,29 @@ const TIMELINE = [
     period: '2022 — 2026',
     title: 'BS Software Engineering',
     org: 'FAST NUCES',
-    desc: 'Studying software engineering — learning to build systems, not just write code. Picking up everything from databases to AI pipelines along the way.',
+    desc: 'Studied software engineering end-to-end — from data structures and algorithms to AI pipelines, DevOps automation, and full-stack systems.',
     icon: '🎓',
     accent: '#d4ff57',
   },
   {
+    period: '2025 — 2026',
+    title: 'DevOps AutoPilot (FYP)',
+    org: 'Final Year Project',
+    desc: 'AI-powered DevOps platform: upload any codebase, auto-detect stack, generate Docker configs via local LLM, and deploy to AWS. Full-stack with FastAPI + React.',
+    icon: '🚀',
+    accent: '#f472b6',
+  },
+  {
     period: '2024',
-    title: 'AI Standup Agent',
+    title: 'MLOps Predictive System',
+    org: 'Course Project',
+    desc: 'End-to-end ML pipeline with Airflow orchestration, MLflow tracking, DVC versioning, Kubernetes deployment, and Prometheus/Grafana monitoring.',
+    icon: '📊',
+    accent: '#fb923c',
+  },
+  {
+    period: '2024',
+    title: 'Async Standup Agent',
     org: 'Personal Project',
     desc: 'Voice-driven AI pipeline that handles daily team standups. Transcribes audio, extracts structure, detects blockers, and delivers summaries to Slack and Notion.',
     icon: '🤖',
@@ -25,24 +41,16 @@ const TIMELINE = [
     icon: '🗺️',
     accent: '#22d3ee',
   },
-  {
-    period: '2024',
-    title: 'Cafe Management System',
-    org: 'DB Course Project',
-    desc: 'Full desktop application for cafe operations — orders, employees, customers, feedback. Built in C# WinForms with a SQL Server backend.',
-    icon: '☕',
-    accent: '#fb923c',
-  },
 ];
 
 const FACTS = [
   { emoji: '📍', label: 'Based in', value: 'Pakistan' },
   { emoji: '🎓', label: 'Degree', value: 'BS Software Engineering' },
   { emoji: '🏫', label: 'University', value: 'FAST NUCES' },
-  { emoji: '📅', label: 'Batch', value: '2022 – 2026' },
-  { emoji: '💻', label: 'Writes in', value: 'Python, C#, JS' },
-  { emoji: '🧠', label: 'Interested in', value: 'AI & Backend' },
-  { emoji: '🌙', label: 'Productive at', value: '2 AM (it\'s a problem)' },
+  { emoji: '📅', label: 'Graduating', value: '2026' },
+  { emoji: '💻', label: 'Writes in', value: 'JS, Python, Dart, C++' },
+  { emoji: '🧠', label: 'Interested in', value: 'AI, DevOps, Backend' },
+  { emoji: '📱', label: 'Mobile', value: 'Flutter, React Native' },
   { emoji: '☕', label: 'Powered by', value: 'Coffee, consistently' },
 ];
 
@@ -66,19 +74,19 @@ export default function AboutSection() {
         }}>
           {/* Left col */}
           <div>
-            {/* Bio */}
             <div style={{ marginBottom: 32 }}>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.9, fontSize: '0.975rem', marginBottom: 16 }}>
-                I&apos;m <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Hamza Farooqi</strong> — a software engineering student at FAST NUCES
-                who builds things for the web and beyond.
+                I&apos;m <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Hamza Farooqi</strong> — a software engineer graduating from FAST NUCES
+                who builds things across the full stack and beyond.
               </p>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.9, fontSize: '0.975rem', marginBottom: 16 }}>
-                My focus is on making software that&apos;s actually useful to someone other than me. That means
-                clean backends, sensible APIs, and AI tools that do real work rather than just look impressive in demos.
+                My work spans AI-powered DevOps platforms, MLOps pipelines, mobile apps with Flutter,
+                and web applications with the MERN stack. I care about writing software that&apos;s actually
+                useful — clean backends, sensible APIs, and tools that do real work.
               </p>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.9, fontSize: '0.975rem' }}>
-                Currently in my final years — spending most of that time either building something new,
-                debugging something old, or pretending I&apos;ll fix that TODO comment later.
+                Currently wrapping up my final year — spending most of that time shipping projects,
+                debugging Docker configs, and pretending I&apos;ll fix that TODO comment later.
               </p>
             </div>
 
@@ -121,7 +129,6 @@ export default function AboutSection() {
               Timeline
             </div>
             <div style={{ position: 'relative' }}>
-              {/* Vertical line */}
               <div style={{
                 position: 'absolute',
                 left: 15,
@@ -134,7 +141,6 @@ export default function AboutSection() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
                 {TIMELINE.map((item, i) => (
                   <div key={i} style={{ display: 'flex', gap: 20 }}>
-                    {/* Dot */}
                     <div style={{
                       width: 31,
                       height: 31,

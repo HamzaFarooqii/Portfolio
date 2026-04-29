@@ -1,15 +1,18 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
+import dynamic from 'next/dynamic';
+
+const Scene3D = dynamic(() => import('./Scene3D'), { ssr: false });
 
 const ROLES = [
   'Software Engineer',
-  'Code Writer',
-  'Problem Solver',
-  'Bug Creator (unintentionally)',
+  'Full-Stack Developer',
   'AI Tools Builder',
+  'DevOps Enthusiast',
+  'Problem Solver',
   'Backend Developer',
-  'Occasional Debugger',
+  'Flutter Dev',
 ];
 
 function TypeWriter({ texts }: { texts: string[] }) {
@@ -53,9 +56,15 @@ export default function HeroSection() {
         alignItems: 'center',
         paddingTop: 64,
         position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      <div className="container">
+      {/* 3D Background */}
+      <Suspense fallback={null}>
+        <Scene3D />
+      </Suspense>
+
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 680 }}>
 
           {/* Availability pill */}
@@ -126,7 +135,7 @@ export default function HeroSection() {
             <TypeWriter texts={ROLES} />
           </p>
 
-          {/* One-liner — what I DO not what I've done */}
+          {/* One-liner */}
           <p style={{
             fontSize: '1.05rem',
             color: 'var(--text-secondary)',
@@ -135,9 +144,8 @@ export default function HeroSection() {
             marginBottom: 44,
             animation: 'fade-up 0.5s ease 0.16s both',
           }}>
-            I write code for a living (and for fun, which concerns people).
-            Software Engineering student at <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>FAST NUCES</strong>, building things that
-            are actually useful — and occasionally things that just look cool.
+            I write code that does useful things — from AI-powered DevOps platforms to route
+            optimization engines. Software Engineering graduate from <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>FAST NUCES</strong>.
           </p>
 
           {/* CTAs */}
@@ -149,6 +157,14 @@ export default function HeroSection() {
           }}>
             <a href="#projects" className="btn-primary">
               See my work
+            </a>
+            <a
+              href="/resume.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost"
+            >
+              📄 Resume
             </a>
             <a
               href="https://github.com/HamzaFarooqii"
@@ -180,6 +196,7 @@ export default function HeroSection() {
         fontFamily: 'var(--font-mono)',
         animation: 'bounce-soft 2.5s ease-in-out infinite',
         letterSpacing: '0.05em',
+        zIndex: 2,
       }}>
         scroll
         <svg width="14" height="20" viewBox="0 0 14 20" fill="none" stroke="currentColor" strokeWidth="1.5">

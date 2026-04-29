@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hamza Farooqi — Resume</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #f5f5f5;
+    color: #1a1a1a;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .page { box-shadow: none; }
+    .no-print { display: none; }
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: white;
+    padding: 28px 32px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  }
+
+  /* Header */
+  .header { margin-bottom: 18px; border-bottom: 2px solid #111; padding-bottom: 14px; }
+  .header h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 2px; }
+  .header .subtitle { font-size: 11px; color: #555; font-weight: 500; margin-bottom: 8px; }
+  .header .contact { display: flex; gap: 14px; flex-wrap: wrap; font-size: 9.5px; color: #444; font-family: 'JetBrains Mono', monospace; }
+  .header .contact a { color: #111; text-decoration: none; }
+  .header .contact span { display: flex; align-items: center; gap: 4px; }
+
+  /* Section */
+  .section { margin-bottom: 16px; }
+  .section-title {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #111;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+  }
+
+  /* Summary */
+  .summary { font-size: 10px; color: #333; line-height: 1.65; }
+
+  /* Skills */
+  .skills-grid { display: grid; grid-template-columns: 120px 1fr; gap: 5px 12px; font-size: 9.5px; }
+  .skills-grid .label { font-weight: 700; color: #111; }
+  .skills-grid .value { color: #333; }
+
+  /* Education */
+  .edu-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
+  .edu-row .degree { font-size: 11px; font-weight: 700; }
+  .edu-row .year { font-size: 9.5px; color: #555; font-family: 'JetBrains Mono', monospace; }
+  .edu-school { font-size: 9.5px; color: #555; }
+
+  /* Projects */
+  .project { margin-bottom: 13px; }
+  .project-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 3px; }
+  .project-name { font-size: 11px; font-weight: 700; color: #111; }
+  .project-tech { font-size: 8.5px; color: #666; font-family: 'JetBrains Mono', monospace; max-width: 360px; text-align: right; }
+  .project ul { list-style: none; padding: 0; }
+  .project li { font-size: 9.5px; color: #333; line-height: 1.55; padding-left: 12px; position: relative; margin-bottom: 2px; }
+  .project li::before { content: '•'; position: absolute; left: 0; color: #999; font-weight: 700; }
+
+  /* Print button */
+  .print-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 24px;
+    background: #111;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    z-index: 100;
+  }
+  .print-btn:hover { background: #333; }
+</style>
+</head>
+<body>
+<button class="print-btn no-print" onclick="window.print()">📄 Print / Save PDF</button>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <h1>HAMZA FAROOQI</h1>
+  <div class="subtitle">Software Engineer</div>
+  <div class="contact">
+    <span>📞 +92 304 944 5637</span>
+    <span>📧 <a href="mailto:hamzafarooqi918@gmail.com">hamzafarooqi918@gmail.com</a></span>
+    <span>🔗 <a href="https://github.com/HamzaFarooqii" target="_blank">github.com/HamzaFarooqii</a></span>
+    <span>💼 <a href="https://linkedin.com/in/hamza-farooqi-382a06265" target="_blank">linkedin.com/in/hamza-farooqi</a></span>
+    <span>🌐 <a href="https://hamzafarooqi.vercel.app" target="_blank">hamzafarooqi.vercel.app</a></span>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<div class="section">
+  <div class="section-title">Professional Summary</div>
+  <p class="summary">
+    Software Engineer graduating from FAST NUCES (2026) with hands-on experience building full-stack applications,
+    AI-powered tooling, and DevOps automation systems. Proficient across the MERN stack, Python/FastAPI, Flutter,
+    and containerization with Docker & Kubernetes. Built production-grade projects including an AI-powered DevOps
+    deployment platform, MLOps pipelines, and multi-agent AI systems. Strong focus on writing clean, maintainable
+    code and delivering software that solves real problems.
+  </p>
+</div>
+
+<!-- SKILLS -->
+<div class="section">
+  <div class="section-title">Technical Skills</div>
+  <div class="skills-grid">
+    <span class="label">Languages</span>
+    <span class="value">JavaScript, TypeScript, Python, C++, Java, Dart, SQL</span>
+    <span class="label">Web / Backend</span>
+    <span class="value">React, Next.js, Node.js, Express.js, FastAPI, Flask, MongoDB, SQL Server</span>
+    <span class="label">Mobile</span>
+    <span class="value">Flutter, React Native</span>
+    <span class="label">AI / ML</span>
+    <span class="value">Google Gemini API, OpenAI Whisper, Ollama (Qwen/Llama), Scikit-learn, MLflow, Apache Airflow</span>
+    <span class="label">DevOps / Cloud</span>
+    <span class="value">Docker, Kubernetes, Terraform, GitHub Actions, CI/CD Pipelines, Prometheus, Grafana</span>
+    <span class="label">Tools</span>
+    <span class="value">Git, Figma, Vercel, DVC, Dagshub, Swagger, Notion API, Slack API</span>
+  </div>
+</div>
+
+<!-- EDUCATION -->
+<div class="section">
+  <div class="section-title">Education</div>
+  <div class="edu-row">
+    <span class="degree">Bachelor of Science in Software Engineering</span>
+    <span class="year">2022 – 2026</span>
+  </div>
+  <div class="edu-school">FAST National University of Computer and Emerging Sciences (NUCES)</div>
+</div>
+
+<!-- PROJECTS -->
+<div class="section">
+  <div class="section-title">Key Projects</div>
+
+  <div class="project">
+    <div class="project-header">
+      <span class="project-name">DevOps AutoPilot — AI Deployment Platform (FYP)</span>
+      <span class="project-tech">FastAPI · React · Ollama LLM · Docker · MongoDB · Terraform</span>
+    </div>
+    <ul>
+      <li>Built full-stack AI-powered DevOps platform that automates Docker & Terraform configuration generation</li>
+      <li>Integrated local LLM (Qwen2.5-Coder via Ollama) for intelligent Dockerfile and docker-compose generation with SSE streaming</li>
+      <li>Developed hybrid heuristic + ML analysis pipeline detecting language, framework, ports, databases, and services automatically</li>
+      <li>Implemented multi-service detection for monorepo projects with per-service Dockerfile generation</li>
+      <li>Built React/TypeScript frontend with real-time build/deploy progress streaming and Docker management UI</li>
+    </ul>
+  </div>
+
+  <div class="project">
+    <div class="project-header">
+      <span class="project-name">MLOps Real-Time Predictive System (RPS)</span>
+      <span class="project-tech">Airflow · MLflow · DVC · Docker · K8s · Prometheus · Grafana · GitHub Actions</span>
+    </div>
+    <ul>
+      <li>Built end-to-end MLOps pipeline for real-time predictive modeling with automated data ingestion and model retraining</li>
+      <li>Orchestrated ETL workflows using Apache Airflow DAGs with scheduled data extraction from live APIs</li>
+      <li>Versioned datasets with DVC and tracked experiments via MLflow integrated with Dagshub</li>
+      <li>Established CI/CD pipeline with GitHub Actions and CML for automated testing and model comparison</li>
+      <li>Containerized ML model serving API using Docker with FastAPI, deployed monitoring stack with Prometheus and Grafana</li>
+    </ul>
+  </div>
+
+  <div class="project">
+    <div class="project-header">
+      <span class="project-name">Async Standup Agent — AI Team Communication</span>
+      <span class="project-tech">Python · FastAPI · Gemini AI · Whisper · Slack API · Notion API · Scikit-learn</span>
+    </div>
+    <ul>
+      <li>Developed multi-stage AI pipeline transforming voice recordings into structured team digests with cross-team blocker detection</li>
+      <li>Integrated OpenAI Whisper for local speech-to-text and Google Gemini for structured JSON extraction</li>
+      <li>Built semantic clustering using Gemini embeddings + Agglomerative Clustering for thematic grouping</li>
+      <li>Automated daily delivery to Slack channels and Notion pages with APScheduler cron jobs</li>
+    </ul>
+  </div>
+
+  <div class="project">
+    <div class="project-header">
+      <span class="project-name">Pakivation — Genetic Algorithm Route Optimizer</span>
+      <span class="project-tech">Python · Flask · Genetic Algorithm · Leaflet.js</span>
+    </div>
+    <ul>
+      <li>Built interactive route planning tool using genetic algorithms for optimal delivery sequence calculation</li>
+      <li>Developed Flask REST API with /optimize endpoint running GA solver in real-time</li>
+      <li>Created dark-mode Leaflet.js map UI with animated path visualization and glassmorphism panel</li>
+    </ul>
+  </div>
+
+  <div class="project">
+    <div class="project-header">
+      <span class="project-name">BluePin — Mobile Car Booking Application</span>
+      <span class="project-tech">Flutter · Dart</span>
+    </div>
+    <ul>
+      <li>Created cross-platform mobile car booking application using Flutter framework</li>
+      <li>Designed and implemented intuitive UI with reusable component library for consistent experience</li>
+      <li>Built complete navigation flow for seamless booking and reservation management</li>
+    </ul>
+  </div>
+
+  <div class="project">
+    <div class="project-header">
+      <span class="project-name">Trip Manager — Full-Stack Web Application</span>
+      <span class="project-tech">React · Node.js · Figma</span>
+    </div>
+    <ul>
+      <li>Designed comprehensive UI/UX in Figma and implemented as a fully working web application</li>
+      <li>Built complete trip planning features including itinerary management, booking flow, and responsive design</li>
+      <li>Developed design system with consistent color schemes, typography, and interactive prototypes</li>
+    </ul>
+  </div>
+
+  <div class="project">
+    <div class="project-header">
+      <span class="project-name">MERN Weather App</span>
+      <span class="project-tech">MongoDB · Express.js · React · Node.js</span>
+    </div>
+    <ul>
+      <li>Developed full-stack weather application with real-time API data integration for accurate forecasting</li>
+      <li>Built RESTful APIs with Express.js backend and responsive React frontend with state management</li>
+    </ul>
+  </div>
+
+</div>
+
+</div>
+</body>
+</html>

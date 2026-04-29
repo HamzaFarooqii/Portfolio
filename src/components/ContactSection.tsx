@@ -33,9 +33,9 @@ const SOCIAL_LINKS = [
         <polyline points="22,6 12,13 2,6" />
       </svg>
     ),
-    href: 'mailto:muhammadhamza0987654321@gmail.com',
+    href: 'mailto:hamzafarooqi918@gmail.com',
     color: '#8b5cf6',
-    label: 'muhammadhamza0987654321@gmail.com',
+    label: 'hamzafarooqi918@gmail.com',
   },
 ];
 
@@ -62,7 +62,7 @@ export default function ContactSection() {
   };
 
   const copyEmail = () => {
-    navigator.clipboard.writeText('muhammadhamza0987654321@gmail.com');
+    navigator.clipboard.writeText('hamzafarooqi918@gmail.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -100,7 +100,7 @@ export default function ContactSection() {
                   <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                     {f.value}
                   </div>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--accent-blue)' }}>{f.sub}</div>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--accent)' }}>{f.sub}</div>
                 </div>
               ))}
             </div>
@@ -239,7 +239,7 @@ export default function ContactSection() {
                         transition: 'all 0.2s',
                         fontFamily: 'var(--font-sans)',
                       }}
-                      onFocus={e => { e.target.style.borderColor = 'var(--accent-blue)'; e.target.style.boxShadow = '0 0 0 3px rgba(59,130,246,0.1)'; }}
+                      onFocus={e => { e.target.style.borderColor = 'var(--accent)'; e.target.style.boxShadow = '0 0 0 3px rgba(212,255,87,0.1)'; }}
                       onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
                     />
                   </div>
@@ -269,7 +269,7 @@ export default function ContactSection() {
                       fontFamily: 'var(--font-sans)',
                       lineHeight: 1.6,
                     }}
-                    onFocus={e => { e.target.style.borderColor = 'var(--accent-blue)'; e.target.style.boxShadow = '0 0 0 3px rgba(59,130,246,0.1)'; }}
+                    onFocus={e => { e.target.style.borderColor = 'var(--accent)'; e.target.style.boxShadow = '0 0 0 3px rgba(212,255,87,0.1)'; }}
                     onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
                   />
                 </div>

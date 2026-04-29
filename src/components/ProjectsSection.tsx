@@ -2,392 +2,328 @@
 
 import { useState } from 'react';
 
-type Project = {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  longDesc: string;
-  emoji: string;
-  gradient: string;
-  accent: string;
-  tags: string[];
-  tagType: string;
-  github: string;
-  live?: string;
-  features: string[];
-  year: string;
-  status: string;
-  statusColor: string;
-};
-
-const PROJECTS: Project[] = [
+const PROJECTS = [
   {
-    id: 'standup',
-    title: 'Async Standup Agent',
-    subtitle: 'AI-powered team standups, autonomously',
-    description: 'A multi-stage AI pipeline that transforms voice recordings into structured team digests — with cross-team blocker detection that no existing tool does.',
-    longDesc: 'Voice goes in, intelligence comes out. The agent transcribes speech via OpenAI Whisper, extracts done/today/blockers via Gemini Flash, clusters updates semantically with embeddings, detects cross-team dependencies, and delivers a professional digest to Slack & Notion — all automatically.',
-    emoji: '🤖',
-    gradient: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%)',
-    accent: '#3b82f6',
-    tags: ['Python', 'FastAPI', 'Gemini AI', 'Whisper', 'Slack API', 'Notion API', 'Scikit-learn', 'APScheduler'],
-    tagType: 'tag-blue',
-    github: 'https://github.com/HamzaFarooqii',
-    features: [
-      '🎤 Voice submission via Web UI + Telegram Bot',
-      '🔊 OpenAI Whisper speech-to-text (runs locally, free)',
-      '🧠 Gemini Flash structured JSON extraction',
-      '🔗 Cross-team blocker detection (novel feature!)',
-      '📊 Semantic clustering with Gemini embeddings',
-      '📝 AI-synthesized professional digest',
-      '📬 Auto-delivery to Slack & Notion',
-      '⏰ APScheduler cron job at 10 AM daily',
+    id: 'devops-autopilot',
+    icon: '🚀',
+    title: 'DevOps AutoPilot',
+    subtitle: 'AI-Powered Deployment Platform — FYP',
+    status: 'Completed',
+    statusColor: '#4ade80',
+    desc: 'Full-stack AI platform that automatically analyzes any codebase, generates Docker configs using a local LLM, and deploys to AWS via Terraform. Upload your project ZIP → get production-ready Docker files.',
+    tags: [
+      { label: 'FastAPI', cls: 'tag-blue' },
+      { label: 'React', cls: 'tag-cyan' },
+      { label: 'Ollama LLM', cls: 'tag-purple' },
+      { label: 'Docker', cls: 'tag-blue' },
+      { label: 'MongoDB', cls: 'tag-green' },
+      { label: 'Terraform', cls: 'tag-orange' },
+      { label: 'scikit-learn', cls: 'tag-yellow' },
     ],
-    year: '2024',
-    status: 'Live',
-    statusColor: '#10b981',
+    details: [
+      'Hybrid heuristic + ML pipeline auto-detects language, framework, ports, databases, and services',
+      'Local LLM (Qwen2.5-Coder via Ollama) generates Dockerfiles and docker-compose.yml with SSE streaming',
+      'Multi-service detection for monorepo projects with per-service Dockerfile generation',
+      'React/TypeScript frontend with real-time build/deploy progress and Docker management UI',
+      'Optional AWS ECS/ECR deployment via AI-generated Terraform configs',
+    ],
+    github: null,
+  },
+  {
+    id: 'mlops-rps',
+    icon: '📊',
+    title: 'MLOps Predictive System',
+    subtitle: 'End-to-End ML Pipeline',
+    status: 'Completed',
+    statusColor: '#4ade80',
+    desc: 'Production-grade MLOps pipeline with automated data ingestion, model training, versioning, CI/CD, containerized serving, and real-time monitoring.',
+    tags: [
+      { label: 'Airflow', cls: 'tag-orange' },
+      { label: 'MLflow', cls: 'tag-blue' },
+      { label: 'DVC', cls: 'tag-purple' },
+      { label: 'Docker', cls: 'tag-blue' },
+      { label: 'Kubernetes', cls: 'tag-cyan' },
+      { label: 'Prometheus', cls: 'tag-orange' },
+      { label: 'Grafana', cls: 'tag-yellow' },
+      { label: 'GitHub Actions', cls: 'tag-green' },
+    ],
+    details: [
+      'ETL workflows orchestrated with Apache Airflow DAGs pulling from live APIs',
+      'Dataset versioning with DVC + experiment tracking via MLflow/Dagshub',
+      'CI/CD pipeline with GitHub Actions and CML for automated model comparison',
+      'Containerized FastAPI model serving deployed to Kubernetes',
+      'Prometheus + Grafana monitoring stack with model drift detection',
+    ],
+    github: null,
+  },
+  {
+    id: 'standup-agent',
+    icon: '🤖',
+    title: 'Async Standup Agent',
+    subtitle: 'AI-Powered Team Communication',
+    status: 'Completed',
+    statusColor: '#4ade80',
+    desc: 'Multi-stage AI pipeline that transforms voice recordings into structured team digests. Transcribes audio, extracts structured data, detects blockers across teams, and delivers summaries to Slack and Notion.',
+    tags: [
+      { label: 'Python', cls: 'tag-yellow' },
+      { label: 'FastAPI', cls: 'tag-blue' },
+      { label: 'Gemini AI', cls: 'tag-purple' },
+      { label: 'Whisper', cls: 'tag-orange' },
+      { label: 'Slack API', cls: 'tag-pink' },
+      { label: 'Notion API', cls: 'tag-cyan' },
+    ],
+    details: [
+      'OpenAI Whisper for local speech-to-text transcription',
+      'Google Gemini for structured JSON extraction from transcriptions',
+      'Semantic clustering using Gemini embeddings + Agglomerative Clustering',
+      'Cross-team blocker detection with automated alert routing',
+      'Automated daily delivery to Slack channels and Notion pages via APScheduler',
+    ],
+    github: 'https://github.com/HamzaFarooqii',
   },
   {
     id: 'pakivation',
+    icon: '🗺️',
     title: 'Pakivation',
     subtitle: 'Genetic Algorithm Route Optimizer',
-    description: 'An interactive map-based delivery route planner that uses genetic algorithms to find the optimal path between multiple drop points in real-time.',
-    longDesc: 'Drop origin and delivery markers on a live dark-mode map, hit Optimize — and watch the genetic algorithm work its magic. A glowing cyan path traces the optimal sequence. Built with Flask backend + Leaflet.js frontend with premium glassmorphism UI.',
-    emoji: '🗺️',
-    gradient: 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%)',
-    accent: '#06b6d4',
-    tags: ['Python', 'Flask', 'Genetic Algorithm', 'Leaflet.js', 'Glassmorphism', 'REST API'],
-    tagType: 'tag-cyan',
-    github: 'https://github.com/HamzaFarooqii/Pakivation',
-    features: [
-      '🗺️ Full-screen dark mode Leaflet.js map',
-      '🧬 Genetic algorithm route optimization',
-      '📍 Custom markers (origin 🚗 + deliveries 📦)',
-      '✨ Animated glowing path visualization',
-      '💎 Glassmorphism floating side panel',
-      '🏎️ Real-time logging in UI',
-      '🔁 /optimize REST API endpoint',
-      '📐 Auto-zoom to fit optimized route',
+    status: 'Completed',
+    statusColor: '#4ade80',
+    desc: 'Interactive route planning tool that uses genetic algorithms to calculate optimal delivery sequences. Drop markers on a dark-mode map, hit optimize, watch the magic.',
+    tags: [
+      { label: 'Python', cls: 'tag-yellow' },
+      { label: 'Flask', cls: 'tag-blue' },
+      { label: 'Genetic Algorithm', cls: 'tag-purple' },
+      { label: 'Leaflet.js', cls: 'tag-green' },
     ],
-    year: '2024',
-    status: 'Complete',
-    statusColor: '#3b82f6',
+    details: [
+      'Flask REST API with /optimize endpoint running GA solver in real-time',
+      'Dark-mode Leaflet.js map UI with animated path visualization',
+      'Configurable GA parameters: population size, mutation rate, generations',
+    ],
+    github: 'https://github.com/HamzaFarooqii/Pakivation',
   },
   {
-    id: 'cafe',
-    title: 'Cafe Management System',
-    subtitle: 'Full-stack desktop application',
-    description: 'A C# WinForms cafe management app with SQL Server backend — complete order tracking, multi-role auth, customer portal, and employee workflows.',
-    longDesc: 'A complete point-of-sale and management system for cafe operations. Features admin dashboard, customer ordering, employee management, feedback system, and SQL trigger-based business logic. Built with .NET Framework 4.7.2 and SQL Server LocalDB.',
-    emoji: '☕',
-    gradient: 'linear-gradient(135deg, #f97316 0%, #f59e0b 50%, #10b981 100%)',
-    accent: '#f97316',
-    tags: ['C#', 'WinForms', 'SQL Server', '.NET 4.7.2', 'MSBuild', 'MSSQL Triggers'],
-    tagType: 'tag-orange',
-    github: 'https://github.com/HamzaFarooqii/CafeManagmentSystem',
-    features: [
-      '👑 Admin dashboard with full CRUD',
-      '🛍️ Customer ordering portal',
-      '👷 Employee management workflows',
-      '💬 Feedback & rating system',
-      '🔐 Multi-role authentication',
-      '⚡ SQL trigger-based business logic',
-      '🏗️ Deployed via MSBuild 0 warnings',
-      '📊 LocalDB schema with foreign keys',
+    id: 'bluepin',
+    icon: '📌',
+    title: 'BluePin',
+    subtitle: 'Mobile Car Booking App',
+    status: 'Completed',
+    statusColor: '#4ade80',
+    desc: 'Cross-platform mobile car booking application built with Flutter. Clean UI with complete booking flow, reservation management, and reusable component library.',
+    tags: [
+      { label: 'Flutter', cls: 'tag-cyan' },
+      { label: 'Dart', cls: 'tag-blue' },
     ],
-    year: '2024',
-    status: 'Complete',
-    statusColor: '#f97316',
+    details: [
+      'Cross-platform mobile app for iOS and Android',
+      'Intuitive car rental UI with reusable component library',
+      'Complete navigation flow for booking and reservation management',
+      'Optimized performance across both platforms',
+    ],
+    github: null,
+  },
+  {
+    id: 'trip-manager',
+    icon: '✈️',
+    title: 'Trip Manager',
+    subtitle: 'Design → Full Web App',
+    status: 'Completed',
+    statusColor: '#4ade80',
+    desc: 'Designed the complete UI/UX in Figma and then built it out as a fully working web application with trip planning, itinerary management, and booking features.',
+    tags: [
+      { label: 'React', cls: 'tag-cyan' },
+      { label: 'Node.js', cls: 'tag-green' },
+      { label: 'Figma', cls: 'tag-pink' },
+    ],
+    details: [
+      'Complete UI/UX design system created in Figma with interactive prototypes',
+      'Implemented as a fully working web application — not just mockups',
+      'Trip creation, itinerary management, and booking flow',
+      'Responsive design with consistent typography and color system',
+    ],
+    github: null,
+  },
+  {
+    id: 'weather-app',
+    icon: '🌦️',
+    title: 'MERN Weather App',
+    subtitle: 'Full-Stack Weather Dashboard',
+    status: 'Completed',
+    statusColor: '#4ade80',
+    desc: 'Full-stack weather application using the MERN stack with real-time API data integration, responsive React UI, and Express.js REST backend.',
+    tags: [
+      { label: 'MongoDB', cls: 'tag-green' },
+      { label: 'Express.js', cls: 'tag-blue' },
+      { label: 'React', cls: 'tag-cyan' },
+      { label: 'Node.js', cls: 'tag-green' },
+    ],
+    details: [
+      'Real-time weather data from external APIs for accurate forecasting',
+      'RESTful API backend with Express.js and data persistence in MongoDB',
+      'Responsive React frontend with clean state management',
+    ],
+    github: null,
   },
 ];
 
 export default function ProjectsSection() {
-  const [active, setActive] = useState<Project>(PROJECTS[0]);
-  const [showing, setShowing] = useState(false);
-
-  const selectProject = (p: Project) => {
-    setActive(p);
-    setShowing(true);
-  };
+  const [expanded, setExpanded] = useState<string | null>(null);
 
   return (
     <section id="projects" className="section">
       <div className="container">
-        {/* Header */}
         <div style={{ marginBottom: 64 }}>
           <div className="section-label">Projects</div>
           <h2 className="section-title">
-            Things I&apos;ve <span className="gradient-text">Actually Built</span>
+            Things I&apos;ve built.
           </h2>
           <p className="section-desc">
-            Not just tutorial clones. Real projects with real complexity — and real bugs that took real hours to fix.
+            From AI deployment platforms to route optimizers — here&apos;s a selection of
+            projects I&apos;ve actually shipped.
           </p>
         </div>
 
-        {/* Project cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: 24, marginBottom: 40 }}>
-          {PROJECTS.map((project) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              isActive={active.id === project.id && showing}
-              onClick={() => selectProject(project)}
-            />
-          ))}
-        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 16 }}>
+          {PROJECTS.map(project => {
+            const isOpen = expanded === project.id;
+            return (
+              <div
+                key={project.id}
+                className="card"
+                style={{
+                  padding: 0,
+                  overflow: 'hidden',
+                  cursor: 'pointer',
+                  transition: 'all 0.25s ease',
+                  border: isOpen ? '1px solid var(--accent-border)' : undefined,
+                }}
+                onClick={() => setExpanded(isOpen ? null : project.id)}
+              >
+                {/* Header bar */}
+                <div style={{
+                  padding: '20px 22px 16px',
+                  borderBottom: '1px solid var(--border)',
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                      <span style={{ fontSize: '1.4rem' }}>{project.icon}</span>
+                      <div>
+                        <div style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)' }}>
+                          {project.title}
+                        </div>
+                        <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+                          {project.subtitle}
+                        </div>
+                      </div>
+                    </div>
+                    <span style={{
+                      fontSize: '0.65rem',
+                      fontWeight: 700,
+                      padding: '3px 8px',
+                      borderRadius: 4,
+                      background: `${project.statusColor}15`,
+                      color: project.statusColor,
+                      border: `1px solid ${project.statusColor}30`,
+                      flexShrink: 0,
+                    }}>
+                      {project.status}
+                    </span>
+                  </div>
 
-        {/* Detail panel */}
-        {showing && (
-          <ProjectDetail
-            project={active}
-            onClose={() => setShowing(false)}
-          />
-        )}
+                  <p style={{ fontSize: '0.835rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+                    {project.desc}
+                  </p>
+                </div>
+
+                {/* Tags */}
+                <div style={{ padding: '12px 22px', display: 'flex', flexWrap: 'wrap', gap: 5 }}>
+                  {project.tags.map(t => (
+                    <span key={t.label} className={`tag ${t.cls}`}>{t.label}</span>
+                  ))}
+                </div>
+
+                {/* Expandable details */}
+                <div style={{
+                  maxHeight: isOpen ? 400 : 0,
+                  overflow: 'hidden',
+                  transition: 'max-height 0.35s ease',
+                }}>
+                  <div style={{
+                    padding: '0 22px 18px',
+                    borderTop: '1px solid var(--border)',
+                    paddingTop: 14,
+                  }}>
+                    <div style={{
+                      fontSize: '0.68rem',
+                      fontWeight: 700,
+                      letterSpacing: '0.1em',
+                      textTransform: 'uppercase',
+                      color: 'var(--text-muted)',
+                      marginBottom: 10,
+                      fontFamily: 'var(--font-mono)',
+                    }}>
+                      Key Features
+                    </div>
+                    <ul style={{ listStyle: 'none', padding: 0 }}>
+                      {project.details.map((d, i) => (
+                        <li key={i} style={{
+                          fontSize: '0.8rem',
+                          color: 'var(--text-secondary)',
+                          lineHeight: 1.55,
+                          paddingLeft: 14,
+                          position: 'relative',
+                          marginBottom: 5,
+                        }}>
+                          <span style={{
+                            position: 'absolute',
+                            left: 0,
+                            color: 'var(--accent)',
+                            fontSize: '0.5rem',
+                            top: 5,
+                          }}>▸</span>
+                          {d}
+                        </li>
+                      ))}
+                    </ul>
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={e => e.stopPropagation()}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: 6,
+                          marginTop: 10,
+                          fontSize: '0.78rem',
+                          color: 'var(--accent)',
+                          textDecoration: 'none',
+                          fontWeight: 600,
+                        }}
+                      >
+                        View on GitHub →
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                {/* Click hint */}
+                <div style={{
+                  padding: '8px 22px',
+                  borderTop: '1px solid var(--border)',
+                  textAlign: 'center',
+                  fontSize: '0.68rem',
+                  color: 'var(--text-muted)',
+                  fontFamily: 'var(--font-mono)',
+                }}>
+                  {isOpen ? '▲ collapse' : '▼ details'}
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
-  );
-}
-
-function ProjectCard({ project, isActive, onClick }: { project: Project; isActive: boolean; onClick: () => void }) {
-  return (
-    <div
-      onClick={onClick}
-      style={{
-        borderRadius: 'var(--radius-lg)',
-        overflow: 'hidden',
-        background: 'var(--bg-card)',
-        border: `1px solid ${isActive ? project.accent + '60' : 'var(--border)'}`,
-        cursor: 'pointer',
-        transition: 'all 0.3s',
-        transform: isActive ? 'translateY(-4px)' : 'translateY(0)',
-        boxShadow: isActive ? `0 20px 60px ${project.accent}20` : 'none',
-        position: 'relative',
-      }}
-    >
-      {/* Header gradient */}
-      <div style={{
-        height: 6,
-        background: project.gradient,
-      }} />
-
-      <div style={{ padding: 28 }}>
-        {/* Top row */}
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 16 }}>
-          <div style={{
-            width: 56,
-            height: 56,
-            borderRadius: 'var(--radius-md)',
-            background: `${project.accent}15`,
-            border: `1px solid ${project.accent}30`,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '1.8rem',
-          }}>
-            {project.emoji}
-          </div>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6,
-            padding: '4px 12px',
-            borderRadius: 100,
-            fontSize: '0.7rem',
-            fontWeight: 700,
-            background: `${project.statusColor}15`,
-            border: `1px solid ${project.statusColor}40`,
-            color: project.statusColor,
-            fontFamily: 'var(--font-mono)',
-          }}>
-            <span style={{ width: 6, height: 6, borderRadius: '50%', background: project.statusColor, display: 'inline-block' }} />
-            {project.status}
-          </div>
-        </div>
-
-        <div style={{ marginBottom: 4, fontSize: '0.7rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-          {project.year}
-        </div>
-        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: 6, color: 'var(--text-primary)' }}>
-          {project.title}
-        </h3>
-        <p style={{ fontSize: '0.8rem', color: project.accent, fontWeight: 600, marginBottom: 12 }}>
-          {project.subtitle}
-        </p>
-        <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 20 }}>
-          {project.description}
-        </p>
-
-        {/* Tags */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 20 }}>
-          {project.tags.slice(0, 4).map(tag => (
-            <span key={tag} className={`tag ${project.tagType}`}>{tag}</span>
-          ))}
-          {project.tags.length > 4 && (
-            <span className="tag tag-blue">+{project.tags.length - 4}</span>
-          )}
-        </div>
-
-        {/* Links */}
-        <div style={{ display: 'flex', gap: 12 }}>
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={e => e.stopPropagation()}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 6,
-              padding: '8px 16px',
-              borderRadius: 8,
-              fontSize: '0.8rem',
-              fontWeight: 600,
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid var(--border)',
-              color: 'var(--text-primary)',
-              textDecoration: 'none',
-              transition: 'all 0.2s',
-            }}
-          >
-            <GitHubIcon /> GitHub
-          </a>
-          <button
-            onClick={(e) => { e.stopPropagation(); onClick(); }}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 6,
-              padding: '8px 16px',
-              borderRadius: 8,
-              fontSize: '0.8rem',
-              fontWeight: 600,
-              background: isActive ? project.accent : 'transparent',
-              border: `1px solid ${project.accent}60`,
-              color: isActive ? '#fff' : project.accent,
-              cursor: 'pointer',
-              transition: 'all 0.2s',
-            }}
-          >
-            {isActive ? '▼ Hide Details' : '▶ Details'}
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ProjectDetail({ project, onClose }: { project: Project; onClose: () => void }) {
-  return (
-    <div
-      style={{
-        borderRadius: 'var(--radius-xl)',
-        background: 'var(--bg-card)',
-        border: `1px solid ${project.accent}40`,
-        overflow: 'hidden',
-        animation: 'fade-up 0.3s ease',
-        boxShadow: `0 30px 80px ${project.accent}15`,
-      }}
-    >
-      {/* Top bar */}
-      <div style={{
-        height: 4,
-        background: project.gradient,
-      }} />
-
-      <div style={{ padding: '40px 40px 32px' }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 32, flexWrap: 'wrap', gap: 16 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <span style={{ fontSize: '2.5rem' }}>{project.emoji}</span>
-            <div>
-              <h3 style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--text-primary)' }}>
-                {project.title}
-              </h3>
-              <p style={{ color: project.accent, fontWeight: 600 }}>{project.subtitle}</p>
-            </div>
-          </div>
-          <button
-            onClick={onClose}
-            style={{
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid var(--border)',
-              color: 'var(--text-secondary)',
-              padding: '8px 16px',
-              borderRadius: 8,
-              cursor: 'pointer',
-              fontSize: '0.875rem',
-            }}
-          >
-            ✕ Close
-          </button>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 40 }}>
-          {/* Description */}
-          <div>
-            <h4 style={{ fontFamily: 'var(--font-mono)', color: project.accent, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 12 }}>
-              // Description
-            </h4>
-            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: 24, fontSize: '0.95rem' }}>
-              {project.longDesc}
-            </p>
-
-            {/* All tags */}
-            <h4 style={{ fontFamily: 'var(--font-mono)', color: project.accent, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 12 }}>
-              // Tech Stack
-            </h4>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-              {project.tags.map(tag => (
-                <span key={tag} className={`tag ${project.tagType}`}>{tag}</span>
-              ))}
-            </div>
-          </div>
-
-          {/* Features */}
-          <div>
-            <h4 style={{ fontFamily: 'var(--font-mono)', color: project.accent, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 12 }}>
-              // Key Features
-            </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {project.features.map((f, i) => (
-                <li key={i} style={{
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                  gap: 10,
-                  fontSize: '0.875rem',
-                  color: 'var(--text-secondary)',
-                  padding: '8px 12px',
-                  borderRadius: 8,
-                  background: `${project.accent}06`,
-                  border: `1px solid ${project.accent}15`,
-                }}>
-                  {f}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* CTA */}
-        <div style={{ marginTop: 32, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary"
-          >
-            <GitHubIcon /> View on GitHub
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function GitHubIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
-    </svg>
   );
 }
